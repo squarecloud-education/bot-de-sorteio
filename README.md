@@ -2,7 +2,7 @@
   <img alt="Square Cloud Banner" src="https://cdn.squarecloud.app/png/github-readme.png">
 </div>
 <h1 align="center">giveaway-bot</h1>
-<p align="center">A giveaway bot for Discord created with <a href="https://docs.python.org/3/library/discord.html" target="_blank">discord.py</a>.</p>
+<p align="center">A giveaway bot for Discord created with discord.py.</p>
 
 ---
 
