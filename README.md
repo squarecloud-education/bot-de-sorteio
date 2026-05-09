@@ -1,14 +1,16 @@
+> 📌 **Note:** This README is written in Portuguese because this project was created as part of a YouTube tutorial in Portuguese.
+
 <div align="center">
   <img alt="Square Cloud Banner" src="https://cdn.squarecloud.app/png/github-readme.png">
 </div>
 <h1 align="center">giveaway-bot</h1>
-<p align="center">A giveaway bot for Discord created with discord.py.</p>
+<p align="center">Um bot de sorteios para Discord criado com discord.py.</p>
 
 ---
 
-This project is a **giveaway bot** for Discord developed during a video on the **Square Cloud** YouTube channel, demonstrating how to build a complete giveaway system using **discord.py**.
+Este projeto é um **bot de sorteios** para Discord desenvolvido durante um vídeo no canal do YouTube da **Square Cloud**, demonstrando como construir um sistema completo de sorteios usando **discord.py**.
 
-The bot allows you to create giveaways with configurable duration and number of winners, automatically ending them and announcing the winners directly in the channel.
+O bot permite criar sorteios com duração e número de vencedores configuráveis, encerrando-os automaticamente e anunciando os vencedores diretamente no canal.
 
-The video that originated this project is available on YouTube:
+O vídeo que originou este projeto está disponível no YouTube:
 https://youtu.be/naDV10shTFQ
