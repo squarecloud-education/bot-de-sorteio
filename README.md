@@ -1,8 +1,9 @@
-> 📌 **Note:** This README is written in Portuguese because this project was created as part of a YouTube tutorial in Portuguese.
-
 <div align="center">
   <img alt="Square Cloud Banner" src="https://cdn.squarecloud.app/png/github-readme.png">
 </div>
+
+> 📌 **Note:** This README is written in Portuguese because this project was created as part of a YouTube tutorial in Portuguese.
+
 <h1 align="center">giveaway-bot</h1>
 <p align="center">Um bot de sorteios para Discord criado com discord.py.</p>
 
