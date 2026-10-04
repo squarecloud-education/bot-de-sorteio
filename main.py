@@ -2,10 +2,10 @@ import discord
 from discord import app_commands
 from discord.ext import commands, tasks
 from dotenv import load_dotenv
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 import os, random
 
-load_dotenv(".env", override=True)
+load_dotenv(".env")
 
 MANAGER_ID = int(os.getenv("CARGO_MANAGER"))
 
@@ -40,13 +40,13 @@ class SorteioDados:
         self.criador = criador
         self.canal = canal
         self.participantes = set()
-        self.encerra_em = datetime.utcnow() + timedelta(seconds=duracao_segundos)
+        self.encerra_em = datetime.now(timezone.utc) + timedelta(seconds=duracao_segundos)
         self.mensagem = None
         self.encerrado = False
     
     @property
     def segundos_restantes(self):
-        delta = self.encerra_em - datetime.utcnow()
+        delta = self.encerra_em - datetime.now(timezone.utc)
         return max(0, int(delta.total_seconds()))
 
     def tempo_formatado(self):
@@ -54,7 +54,7 @@ class SorteioDados:
         if s >= 3600:
             h, resto = divmod(s, 3600)
             m, s = divmod(resto, 60)
-            return f"{h}h {m}m s{s}"
+            return f"{h}h {m}m {s}s"
         elif s >= 60:
             m, s = divmod(s, 60)
             return f"{m}m {s}s"
@@ -106,7 +106,7 @@ class SorteioView(discord.ui.View):
 async def tick_sorteios():
     encerrados = []
 
-    for msg_id, sorteio in sorteios_ativos.items():
+    for msg_id, sorteio in list(sorteios_ativos.items()):
         if sorteio.encerrado:
             continue
         
@@ -196,7 +196,7 @@ async def sorteio(interaction:discord.Interaction, premio:str, duracao:str, ganh
         return
 
     if segundos > _DURACAO_MAX:
-        await interaction.response.send_message(f"A duração máxima é {_DURACAO_MAX}d")
+        await interaction.response.send_message(f"A duração máxima é {_DURACAO_MAX // _UNIDADES['d']}d", ephemeral=True)
         return
     
     await interaction.response.defer()
@@ -216,7 +216,7 @@ async def cancelar(interaction:discord.Interaction):
     if not await checar_manager(interaction):
         return
     
-    alvo = next((s for s in sorteios_ativos.values() if s.canal == interaction.channel_id and not s.encerrado), None)
+    alvo = next((s for s in sorteios_ativos.values() if s.canal.id == interaction.channel_id and not s.encerrado), None)
 
     if alvo is None:
         await interaction.response.send_message("Não há sorteio ativo neste canal.", ephemeral=True)
